@@ -50,7 +50,7 @@ var win = Titanium.UI.createWindow({
 					win.open();
 				
 			},
-
+//I wish you weren't an ADHA mosalman man
 			error:function(e)
 			{
 				alert("There was an error");
