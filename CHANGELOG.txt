@@ -1,4 +1,1 @@
-
-Version 1, Alpha Stage
-
-Working camera and GPS components
+Place your change log text here.  This file will be incorporated with your app at package time.
