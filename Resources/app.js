@@ -1,9 +1,23 @@
 
 var win = Titanium.UI.createWindow({
 	title:"Submit Report",
-	backgroundColor:'#F5D5D9',
+	backgroundColor:'#bdc3c7',
 	exitOnClose: true
 });
+
+
+var bannerTop = Titanium.UI.createLabel(
+					{
+						text:'sample guide text',
+						font:{fontSize:10,fontFamily:'Helvetica Neue'},
+						textAlign:Ti.UI.TEXT_ALIGNMENT_CENTER,
+						top: '0%',
+						width: '100%',
+						height : '5%',
+						color: '#7f8c8d',
+						backgroundColor: '#ecf0f1'
+					});
+
 
 /*
 var scrollview = Ti.UI.createScrollView({ 
@@ -32,27 +46,31 @@ var longi = 0;
 					var imView = Titanium.UI.createImageView(
 						{
 						image:theimg,
-						width:140,
-						height:100,
-						top:1,
+						width:150,
+						height:105,
+						//top:'%',					
+						borderRadius:10,
+											 
 						//zIndex:1,
-						backgroundColor: '#C47A82'
+						//backgroundColor: '#C47A82',
+						top:'7%'
 					});
 					
 					win.add(imView);
 					//scrollview.add(imView);
 					
-										
+									
 			   var myview = Ti.UI.createView(
 					{
 						layout: 'vertical', 
-						top : '30%',
-						bottom:'2%',
-						left:'1%',
-						right:'1%',
-						borderRadius:10,
+						top : '29%',
+						//bottom:'1%',
+						//left:'1%',
+						//right:'1%',
+						height:Titanium.UI.SIZE,
+						//borderRadius:10,
 						//width: '100%',
-						backgroundColor : '#B59EA0'
+						//backgroundColor : '#B59EA0'
 					});
 				
 				//scrollview.add(myview);
@@ -61,18 +79,25 @@ var longi = 0;
 				var title = Ti.UI.createTextField(
 					{
 						//width:'100%',
-						height:'17%',
+						height:'12%',
 						left:'2%',
 						right:'2%',
+						top:'2%',
+						//bottom:'2%',
+						
+						paddingLeft:6,
+    					paddingRight:6,
+    					paddingTop:3,
+    					paddingBottom:3,
 						hintText: 'Title Of Report (MUST)',
 						bubbleParent: false,
 						
-						font:{fontSize:12,fontFamily:'Helvetica Neue'},
-						color:'#336699',
-						backgroundColor: 'white',
+						font:{fontSize:13, fontFamily:'Helvetica Neue'},
+						color:'#2c3e50',
+						backgroundColor: '#ecf0f1',
 						borderRadius:10,
-						borderColor: 'blue',
-						borderWidth: '1',
+						//borderColor: '#d35400',
+						//borderWidth: '3',
 						borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 						
 						keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
@@ -87,40 +112,54 @@ var longi = 0;
 				var descr = Ti.UI.createTextField(
 					{
 						//width:'100%',
-						height:'17%',
+						height:'12%',
 						left:'2%',
 						right:'2%',
-						paddingLeft:8,
-    					paddingRight:8,
+						top:'2%',
+						//bottom:'2%',
+						
+						paddingLeft:6,
+    					paddingRight:6,
+    					paddingTop:3,
+    					paddingBottom:3,
 						hintText: 'Description (MUST)',
-						font:{fontSize:12,fontFamily:'Helvetica Neue'},
-						color:'#336699',
-						backgroundColor: 'white',
+						font:{fontSize:13,fontFamily:'Helvetica Neue'},
+						color:'#2c3e50',
+						backgroundColor: '#ecf0f1',
 						borderRadius:10,
-						borderColor: 'blue',
-						borderWidth: '1',
+						//borderColor: '#d35400',
+						//borderWidth: '3',
 						borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 						keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
 						returnKeyType:Titanium.UI.RETURNKEY_NEXT
 					});
 				var loc = Ti.UI.createTextField(
 					{
+						
+					
 						//width:'100%',
-						height:'17%',
+						height:'12%',
 						left:'2%',
 						right:'2%',
-						paddingLeft:8,
-    					paddingRight:8,
+						top:'2%',
+						//bottom:'2%',
+						
+						paddingLeft:6,
+    					paddingRight:6,
+    					paddingTop:3,
+    					paddingBottom:3,
 						hintText: 'Location (MUST)',
-						font:{fontSize:12,fontFamily:'Helvetica Neue'},
-						color:'#336699',
-						backgroundColor: 'white',
+						font:{fontSize:13,fontFamily:'Helvetica Neue'},
+						color:'#2c3e50',
+						backgroundColor: '#ecf0f1',
 						borderRadius:10,
-						borderColor: 'blue',
-						borderWidth: '1',
+						//borderColor: '#d35400',
+						//borderWidth: '3',
 						borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 						keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
 						returnKeyType:Titanium.UI.RETURNKEY_DONE
+						
+						
 					});
 				
 				
@@ -133,14 +172,25 @@ var longi = 0;
 				myview.add(title);
 				myview.add(descr);
 				myview.add(loc);
-				
+				win.add(bannerTop);
 				
 				var btn = Ti.UI.createButton(
 					{
 						title : 'Submit Report!',
-						width: '35%',
-						height: '15%',
-						font:{fontSize:12,fontFamily:'Helvetica Neue'},
+						font:{fontSize:14, fontWeight:'bold', fontFamily:'Helvetica Neue'},
+						width: '40%',
+						height: '12%',
+						top: '5%',
+						paddingLeft:10,
+    					paddingRight:10,
+    					paddingTop:3,
+    					paddingBottom:3,
+						color:'#ecf0f1',
+						backgroundColor: '#3498db',
+						
+						borderRadius: 20,
+						//borderWidth: 2
+						
 					});
 				myview.add(btn);
 				
@@ -282,26 +332,30 @@ var longi = 0;
 				var coordss = Titanium.UI.createLabel(
 					{
 						font:{fontSize:10,fontFamily:'Helvetica Neue'},
-						//textAlign:'center',
-						width:'100%',
-						color: 'black'
+						textAlign:Ti.UI.TEXT_ALIGNMENT_CENTER,
+						top: '5%',
+						width: '80%',
+						height : '10%',
+						color: '#7f8c8d',						
+						backgroundColor: '#ecf0f1'
 					});
 					
 				myview.add(coordss);
-				
+				/*
 				var displaydata = Ti.UI.createLabel(
 					{
 						top: 20,
 						font:{fontSize:10,fontFamily:'Helvetica Neue'},
+						//textAlign:TEXT_ALIGNMENT_CENTER,
 						width: '70%',
 						height : '10%',
-						color: 'black',
-						backgroundColor: 'yellow'
+						color: '#7f8c8d',
+						backgroundColor: '#3498db'
 
 					});
 				myview.add(displaydata);
 				
-				
+				*/
 				win.add(myview);
 				
 				//listener to hide keyboard when clicked outside of a text field
@@ -318,7 +372,7 @@ var longi = 0;
 					
 				if (Ti.Platform.osname == "android") 
 					    {
-					    	win.title = 'Submit Report (A)';
+					    	//win.title = 'Submit Report (A)';
 					    	
 					    	var providerGps = Ti.Geolocation.Android.createLocationProvider(
 					    	{
