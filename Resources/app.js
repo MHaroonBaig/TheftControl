@@ -3,9 +3,11 @@ if (!(Ti.Platform.osname == "android"))
 { var tabGroup = Ti.UI.createTabGroup(); }
  
 
-var win = Titanium.UI.createWindow({
+var win = Titanium.UI.createWindow(
+{
 	title:"Submit Report",
 	backgroundColor:'#bdc3c7',
+<<<<<<< HEAD
 
 	tabBarHidden:true,
 
@@ -25,6 +27,15 @@ if (!(Ti.Platform.osname == "android"))
 var bannerTop = Titanium.UI.createLabel(
 					{
 						text:'Photo Preview',
+=======
+	exitOnClose: true
+});
+
+
+var bannerTop = Titanium.UI.createLabel(
+					{
+						text:'sample guide text',
+>>>>>>> cb27777c73dcc817577e70e122763cacb7273447
 						font:{fontSize:10,fontFamily:'Helvetica Neue'},
 						textAlign:Ti.UI.TEXT_ALIGNMENT_CENTER,
 						top: '0%',
@@ -34,7 +45,7 @@ var bannerTop = Titanium.UI.createLabel(
 						backgroundColor: '#ecf0f1'
 					});
 
-
+//ok
 /*
 var scrollview = Ti.UI.createScrollView({ 
    contentWidth:'auto', 
@@ -161,6 +172,8 @@ var longi = 0;
 	
 				var loc = Ti.UI.createTextField(
 					{
+						
+					
 						//width:'100%',
 						height:'12%',
 						left:'2%',
@@ -182,11 +195,14 @@ var longi = 0;
 						borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 						keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
 						returnKeyType:Titanium.UI.RETURNKEY_DONE
+						
+						
 					});
 										
 				myview.add(title);
 				myview.add(descr);
 				myview.add(loc);
+<<<<<<< HEAD
 				
 				if (Ti.Platform.osname == "android")    //buggy on iOS! keyboard doesnt show up
 				{
@@ -195,6 +211,8 @@ var longi = 0;
 					loc.addEventListener('return', function() { win.animate({bottom: 0, duration:100}); });
 				}
 				
+=======
+>>>>>>> cb27777c73dcc817577e70e122763cacb7273447
 				win.add(bannerTop);
 				
 				var btn = Ti.UI.createButton(
@@ -407,7 +425,11 @@ var longi = 0;
 					});
 					
 				myview.add(coordss);
+<<<<<<< HEAD
 
+=======
+				/*
+>>>>>>> cb27777c73dcc817577e70e122763cacb7273447
 				var displaydata = Ti.UI.createLabel(
 					{
 						top: 20,
@@ -416,13 +438,21 @@ var longi = 0;
 						width: '70%',
 						height : '10%',
 						color: '#7f8c8d',
+<<<<<<< HEAD
 						backgroundColor:'#bdc3c7',
 						//backgroundColor: '#3498db'
+=======
+						backgroundColor: '#3498db'
+>>>>>>> cb27777c73dcc817577e70e122763cacb7273447
 
 					});
 				myview.add(displaydata);
 				
+<<<<<<< HEAD
 
+=======
+				*/
+>>>>>>> cb27777c73dcc817577e70e122763cacb7273447
 				win.add(myview);
 				
 				//listener to hide keyboard when clicked outside of a text field
