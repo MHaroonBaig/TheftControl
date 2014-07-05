@@ -56,9 +56,8 @@ var longi = 0;
 				{ win.open(); }
 				else
 				{tabGroup.open(); }
-				var img = e.media;
-				//img = e.media.imageAsResized(300, 300);
-				
+				//img = e.media;
+				img = e.media.imageAsResized(300, 300);
 				var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'temp.jpg');
 				f.write(img);
 				theimg = f.nativePath;
@@ -220,7 +219,7 @@ var longi = 0;
 				btn.addEventListener('click', function(e)
 					{
 						//displaydata.text = ' Sending..,' + title.value + ' , ' + descr.value;
-						//fimg = f.read();
+						//fimg = f.read;
 						if (lat == 0 && longi == 0)
 						{
 							displaydata.text = 'Wait for coordinates! Cant submit yet!';
@@ -263,9 +262,6 @@ var longi = 0;
 						//if (Titanium.Network.online == true)
 						//{ 
 							var rclient = Titanium.Network.createHTTPClient();
-														
-							rclient.open("POST","http://nokunda.labandroid.com/api");
-							rclient.setRequestHeader("Connection", "close");
 							
 							rclient.onload = function()
 							{
@@ -299,6 +295,10 @@ var longi = 0;
 							};
  
 							
+							rclient.open("POST","http://nokunda.labandroid.com/api");
+							//rclient.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+							//rclient.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+							//rclient.setRequestHeader("Content-Type","application/json");
 							var params = {
 						        "task":"report",
 						        "incident_title": title.value,
@@ -311,55 +311,11 @@ var longi = 0;
 						        latitude:lat,
 						        longitude:longi,
 						        location_name:loc.value,
-						        //incident_photo:e.media
-						      	"incident_photo[]" : img
-
+						        incident_photo:e.media
 						    };
 							
 							//rclient.send(params);
 							rclient.send(params);
-							
-
-								// Facebook Integration starts here //
-	
-								var fb = require('facebook');
-								fb.appid = 516713608430736;
-								fb.permissions = ['publish_stream', 'publish_actions'];
-								fb.forceDialogAuth = true;
-								
-								fb.addEventListener('login', function(e) 
-								{
-									if (e.success) {
-										alert('Logged In');
-									} else if (e.error) {
-										alert(e.error);
-									} else if (e.cancelled) {
-										alert("Canceled");
-									}
-								});
-								fb.authorize();
-					
-								//var f = Ti.Filesystem.getFile('alhamdulillah.jpg');
-								//var reward = f.read();
-								var data = {
-									message : 'Kunda SPOTTED at: ' + lat + ',' + longi, 
-									picture : img
-								};
-								fb.requestWithGraphPath('me/photos', data, 'POST', function(e) {
-									if (e.success) {
-										alert("Success!  From FB: " + e.result);
-										//alert("Successfully posted to facebook");
-									} else {
-										if (e.error) {
-											alert('Error:' + e.error);
-										} else {
-											alert("Unkown result");
-										}
-									}
-								});
-					
-								// Integration over //
-							
 							
 					//	}
 					//	else
@@ -444,27 +400,12 @@ var longi = 0;
 					    	var providerGps = Ti.Geolocation.Android.createLocationProvider(
 					    	{
 						    name: Ti.Geolocation.PROVIDER_GPS,
-						    minUpdateDistance: 0,
-						    minUpdateTime: 0
+						    minUpdateDistance: 0.4,
+						    minUpdateTime: 1
 							});
 							
 							Ti.Geolocation.Android.addLocationProvider(providerGps);
 							Ti.Geolocation.Android.manualMode = true;
-							
-								//NEW rule
-								var Rule = Ti.Geolocation.Android.createLocationRule(
-								{
-								// Rule applies to GPS provider
-								provider : Ti.Geolocation.PROVIDER_GPS,
-								// Must be accurate to this value in meters
-								accuracy : 15,
-								// Location update should be no older than this value in milliseconds
-								maxAge : 120,
-								// Location updates should be no more frequent than this value in milliseconds
-								minAge : 100
-								});
-
-							Titanium.Geolocation.Android.addLocationRule(Rule);
 						}
 				 else
 						{   

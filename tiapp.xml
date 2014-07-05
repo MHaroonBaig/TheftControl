@@ -9,11 +9,12 @@
     <copyright>2014 by NoKunda</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
-    <navbar-hidden>false</navbar-hidden>
-    <analytics>true</analytics>
+    <navbar-hidden>true</navbar-hidden>
+    <analytics>false</analytics>
     <guid>12fcc53c-da61-408b-8425-086f6c42be8f</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <ios>
+        <property name="ti.facebook.appid">516713608430736</property>
         <plist>
             <dict>
                 <key>UISupportedInterfaceOrientations~iphone</key>
@@ -39,8 +40,6 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android"/>
-    
-
     <mobileweb>
         <precache/>
         <splash>
@@ -50,6 +49,10 @@
         <theme>default</theme>
     </mobileweb>
     <modules/>
+    <modules>
+        <module platform="android">facebook</module>
+        <module platform="iphone">facebook</module>
+    </modules>
     <deployment-targets>
         <target device="iphone">false</target>
         <target device="ipad">false</target>
@@ -58,5 +61,5 @@
         <target device="mobileweb">true</target>
         <target device="tizen">false</target>
     </deployment-targets>
-    <sdk-version>3.2.2.GA</sdk-version>
+    <sdk-version>3.2.3.GA</sdk-version>
 </ti:app>
