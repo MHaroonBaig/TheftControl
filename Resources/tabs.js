@@ -19,7 +19,7 @@ function tabs()
 		});
 	var tabsavedreports = Ti.UI.createTab(
 		{ 
-			title: 'Saved Reports', 
+			title: 'Pending Reports', 
 			icon: 'KS_nav_views.png', 
 			window: winsavedreports 
 		});

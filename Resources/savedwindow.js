@@ -2,7 +2,7 @@ function savedwindow()
 { 
 	var swindow = Ti.UI.createWindow(
 		{ 
-			title: 'Saved Reports', 
+			title: 'Pending Reports', 
 			backgroundColor: '#FFFFFF', 
 			barColor: '#3498db',
 			fullscreen: true,
