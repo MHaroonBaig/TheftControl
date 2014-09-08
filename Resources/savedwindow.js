@@ -100,11 +100,16 @@ function savedwindow()
 		{
 		     var db = Ti.Database.open("mydb");
 		     db.execute('DELETE FROM params WHERE id=?', item.id);
-		     db.close();
 		     listreports();
 		     alert("responseText: " + this.responseText);
 		     response = JSON.parse(this.responseText);
-			 
+		    
+		    row = db.execute('SELECT count FROM counter');
+		    var currcount = row.fieldByName("count");
+		    currcount++;
+			db.execute('UPDATE counter SET count=?', currcount);
+			row.close();
+			db.close();
 		};
 		
 		rclient.onsendstream = function(e)

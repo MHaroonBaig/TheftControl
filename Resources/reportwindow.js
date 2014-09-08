@@ -2,6 +2,7 @@ var lat = 0;
 var longi = 0;
 var currentTime = new Date();
 
+
 function reportwindow()
 { 
 	
@@ -13,7 +14,7 @@ function reportwindow()
 			fullscreen: true, 
 			navBarHidden: true 
 		});
-	
+	rwindow.addEventListener('focus', updatestuff);
 	
 	var btn = Ti.UI.createButton({
 			title : 'Capture Kunda >>',
@@ -100,7 +101,10 @@ function reportwindow()
 				submitbtn.addEventListener('click', function(e)
 				{
 					submitbtn.enabled=false;
-					
+					if(String(details.value).length<3)
+					{
+						details.value = 'NoDetails';
+					}
 					var par = getparams();
 					
 					rclient = Titanium.Network.createHTTPClient();
@@ -110,12 +114,12 @@ function reportwindow()
 					rclient.onload = function()
 					{
 					     alert("responseText: " + this.responseText);
+					     curlevel(1);
 					};
 					
 					rclient.onsendstream = function(e)
 					{
-					   //alert("Uploading. Check progress");
-					   Ti.API.info('PROGRESS: ' + e.progress);
+					   displaydata.text = e.progress;
 					};
 					
 					rclient.onerror = function(e) 
@@ -151,8 +155,70 @@ function reportwindow()
 				
 				lowerview.add(submitbtn);
 				
-
+				fbbtn = genericButton();
+				fbbtn.title = 'Facebook Share';
+				fbbtn.top = '8%';
+				fbbtn.height = '15%';
 				
+				fbbtn.addEventListener('click', function(e)
+				{
+					fbbtn.enabled=false;
+					var fb = require('facebook');
+						fb.appid = 516713608430736;
+						//fb.permissions = ['publish_stream', 'publish_actions'];
+						fb.permissions = ['publish_stream'];
+						fb.forceDialogAuth = true;
+						
+						fb.addEventListener('login', function(e) 
+						{
+							if (e.success) {
+								alert('Logged In');
+							} else if (e.error) {
+								alert(e.error);
+							} else if (e.cancelled) {
+								alert("Canceled");
+							}
+						});
+						fb.authorize();
+			
+						//var f = Ti.Filesystem.getFile('alhamdulillah.jpg');
+						//var reward = f.read();
+						var data = {
+							message : 'Kunda SPOTTED  and Reported!', 
+							picture : img
+						};
+						
+						fb.requestWithGraphPath('me/photos', data, 'POST', function(e) 
+						{
+							if (e.success) 
+							{
+								alert("Success!  From FB: " + e.result);
+								//alert("Successfully posted to facebook");
+							}
+							else 
+							{
+								if (e.error) 
+								{
+									alert('Error:' + e.error);
+								} 
+								else
+								{
+									alert("Unkown result");
+								}
+							}
+						});
+			
+			
+
+				});
+				
+				lowerview.add(fbbtn);
+				
+				
+				var displaydata = genericLabel();
+				displaydata.font = { fontSize:13, fontFamily:'Helvetica Neue'};
+				displaydata.top = '7%';
+				lowerview.add(displaydata);
 				
 			},
 			error:function(e)
@@ -179,24 +245,27 @@ function reportwindow()
 	
 	rwindow.add(btn);
 	
-	var nokundalabel = Titanium.UI.createLabel(
-	{
-		text:'NoKunda',
-		font:
-		{
-			fontSize:28,fontFamily:'Helvetica Neue',fontWeight:'bold'
-		},
-		textAlign:Ti.UI.TEXT_ALIGNMENT_CENTER,
-		top: '10%',
-		width: Ti.UI.SIZE,
-		height : Ti.UI.SIZE,
-		color: 'black',
-		backgroundColor: '#FFFFFF'
-	});
+	var nokundalabel = genericLabel();
+	nokundalabel.text = 'NoKunda';
+	nokundalabel.font = { fontSize : 28, fontFamily:'Helvetica Neue', fontWeight:'bold' }; 
+	nokundalabel.top = '10%';	
 	rwindow.add(nokundalabel);
 	
-
-		 
+	function updatestuff()
+	{
+		var currentlabel= genericLabel();
+		currentlabel.top = '25%';
+		level = curlevel(2);
+		currentlabel.text = "Current Level: " + level;	
+		rwindow.add(currentlabel);
+		
+		var pending = genericLabel();
+		pending.top = '34%';
+		pendingrep = getpending();
+		pending.text = 'Pending Reports: ' + pendingrep;
+		rwindow.add(pending);
+	}
+	
 	return rwindow;
 	//return camwindow; 
 };
@@ -316,6 +385,30 @@ var btn = Ti.UI.createButton(
 }
 
 
+function genericLabel()
+{
+	
+		
+	var glabel = Titanium.UI.createLabel(
+	{
+		text:'N',
+		font:
+		{
+			fontSize:14,fontFamily:'Helvetica Neue',fontWeight:'bold'
+		},
+		textAlign:Ti.UI.TEXT_ALIGNMENT_CENTER,
+		//top: '10%',
+		width: Ti.UI.SIZE,
+		height : Ti.UI.SIZE,
+		color: 'black',
+		backgroundColor: '#FFFFFF'
+	});
+	
+	return glabel;
+}
+
+
+
 function textareasetup()
 {
 	var title = Ti.UI.createTextArea(
@@ -404,3 +497,68 @@ function getparams()
 
 }
 
+
+
+function curlevel(check)
+{
+	
+	var db = Ti.Database.open("mydb");
+	row = db.execute('SELECT count FROM counter');
+	
+	if (row.isValidRow() )
+	{
+		var curcount = row.fieldByName("count");
+	}
+	
+	else
+	{
+		row.close();
+		db.close();
+		return 9999;
+	}
+		
+		
+		
+	if ( check == 1)    		//increment counter, after report uploaded
+	{
+		curcount++;
+		db.execute('UPDATE counter SET count=?', curcount);
+		row.close();
+		db.close();
+		return;
+	}
+	
+	else if ( check == 2)  		//get current count
+	{
+		row.close();
+		db.close();
+		return curcount;
+	}
+	
+	else
+	{
+		row.close();
+		db.close();
+		return 55555;
+	}
+
+}
+
+
+function getpending()
+{
+	
+	var db = Ti.Database.open("mydb");
+	var rows = db.execute('SELECT id,title FROM params');
+	var pendingnum = 0;	
+	while ( rows.isValidRow() ) 
+	{
+	  pendingnum++;
+	  rows.next();
+	}
+	
+	rows.close();
+	db.close();
+	
+	return pendingnum;
+}
