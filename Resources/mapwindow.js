@@ -36,15 +36,16 @@ function mapwindow()
 	});
 	
 	self.add(mapview);
-	rc = Map.isGooglePlayServicesAvailable();
-	if ( rc == Map.SUCCESS )
-	{
-		Ti.API.info('GooG Play Services INSTALLED on Phone!!');
-	}
-	else
-	{
-		Ti.API.info('Google Play services NOT INSTALLED!');
-	}
+	//rc = Map.isGooglePlayServicesAvailable();
+	//if ( rc == Map.SUCCESS )
+	//{
+		//Ti.API.info('GooG Play Services INSTALLED on Phone!!');
+	//}
+	//else
+	//{
+		//Ti.API.info('Google Play services NOT INSTALLED!');
+	//}
+	
 	
 	return self; 
 };
