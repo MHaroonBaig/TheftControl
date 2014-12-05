@@ -25,3 +25,4 @@ Currently, we have chosen GNU General Public License v3.0 for this app. The term
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+** I am no longer a maintainer of this repository. If you want to contribute and want to take the ownership, do let me know **
